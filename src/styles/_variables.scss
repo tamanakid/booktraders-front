@@ -23,9 +23,3 @@ $color-secondary-light-3: tint($color-secondary, 75%);
 $color-secondary-dark-1: shade($color-secondary, 25%);
 $color-secondary-dark-2: shade($color-secondary, 50%);
 $color-secondary-dark-3: shade($color-secondary, 75%);
-
-
-:export {
-	colorPrimary: $color-primary;
-	colorSecondary: $color-secondary-dark-2;
-}
