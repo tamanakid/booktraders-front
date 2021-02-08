@@ -1,8 +1,19 @@
 @import 'functions';
 @import 'variables';
+@import 'layout';
+
+/**
+Fonts
+**/
+
+@font-face {
+  font-family: 'Quattrocento';
+  src: url(../assets/fonts/font-quattrocento/Quattrocento-Regular.ttf)
+}
 
 * {
   box-sizing: border-box;
+  font-family: 'Quattrocento';
 }
 
 body {

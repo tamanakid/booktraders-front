@@ -7,7 +7,6 @@ $color-grey-light: #EEEEEE;
 $color-primary: #3C6E71;
 $color-secondary: #284B63;
 
-
 /**
  * Tinted and Shaded Colors
  */
@@ -17,3 +16,16 @@ $color-primary-light-3: tint($color-primary, 75%);
 $color-primary-dark-1: shade($color-primary, 25%);
 $color-primary-dark-2: shade($color-primary, 50%);
 $color-primary-dark-3: shade($color-primary, 75%);
+
+$color-secondary-light-1: tint($color-secondary, 25%);
+$color-secondary-light-2: tint($color-secondary, 50%);
+$color-secondary-light-3: tint($color-secondary, 75%);
+$color-secondary-dark-1: shade($color-secondary, 25%);
+$color-secondary-dark-2: shade($color-secondary, 50%);
+$color-secondary-dark-3: shade($color-secondary, 75%);
+
+
+:export {
+	colorPrimary: $color-primary;
+	colorSecondary: $color-secondary-dark-2;
+}
