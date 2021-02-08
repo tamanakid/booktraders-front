@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Router
 } from 'react-router-dom';
 
+import Header from 'layout/header/Header'
 import appRoutes from './routes'
-import RouteLayout from 'layout/route-layout/RouteLayout'
 import './App.scss';
 
 
 
-const App: React.FunctionComponent = () => {
+const App = () => {
   return (
-    <Router>
+    <React.Fragment>
+      <Header />
       <Switch>
-        {appRoutes.map(route => {
-          return (
-            <RouteLayout route={route} children={
-              <Route key={route.name} path={route.path} component={route.component} exact={route.exact} />
-            }/>
-          )
-        })}
+        {appRoutes.map(route => (
+          <Route key={route.name} path={route.path} exact={route.exact} component={route.view}>
+          </Route>
+        ))}
       </Switch>
-    </Router>
+    </React.Fragment>
   );
 }
 

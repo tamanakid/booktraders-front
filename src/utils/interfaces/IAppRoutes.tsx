@@ -1,10 +1,9 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 
 interface IAppRoute {
-	component: FunctionComponent,
+	view: React.FunctionComponent,
 	name: string,
 	path: string,
-	showHeader: boolean,
 	exact: boolean,
 };
 

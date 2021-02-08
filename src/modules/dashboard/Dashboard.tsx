@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Dashboard.scss';
 
-function Dashboard () {
+const Dashboard = (props: any) => {
 
-	const [courses, setCourses] = useState(['Physics I'])
+	const [courses, setCourses] = useState<Array<string>>(['Physics I'])
 
 	return (
 		<div>

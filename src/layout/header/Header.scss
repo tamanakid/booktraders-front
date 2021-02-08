@@ -1,0 +1,14 @@
+@import 'index.scss';
+
+.header {
+  width: 100%;
+  height: 2.5rem;
+
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+
+  background-color: $color-primary-dark-2;
+  color: $color-grey-light;
+}

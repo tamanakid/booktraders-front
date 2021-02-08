@@ -1,9 +1,19 @@
+/**
+ * Main Color Palette
+ */
+$color-grey-dark: #353535;
+$color-grey: #D9D9D9;
+$color-grey-light: #EEEEEE;
+$color-primary: #3C6E71;
+$color-secondary: #284B63;
 
 
-$color-primary-dark: #320A28;
-$color-primary: #511730;
-$color-secondary-dark: #8E443D;
-$color-secondary: #CB9173;
-$color-tertiary: #E0D68A;
-
-$color-text: #ffeeee;
+/**
+ * Tinted and Shaded Colors
+ */
+$color-primary-light-1: tint($color-primary, 25%);
+$color-primary-light-2: tint($color-primary, 50%);
+$color-primary-light-3: tint($color-primary, 75%);
+$color-primary-dark-1: shade($color-primary, 25%);
+$color-primary-dark-2: shade($color-primary, 50%);
+$color-primary-dark-3: shade($color-primary, 75%);
