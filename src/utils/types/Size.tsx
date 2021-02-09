@@ -1,0 +1,1 @@
+export type SizeMaterial = 'small' | 'medium'
