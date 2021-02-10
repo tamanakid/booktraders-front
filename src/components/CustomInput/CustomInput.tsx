@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ChangeEventHandler, ChangeEvent } from 'react';
-import { TextField } from '@material-ui/core'
+import { TextField, TextFieldProps } from '@material-ui/core'
 
 import { SetStateDispatch } from 'utils/types/CustomHookTypes'
 
@@ -20,16 +20,14 @@ export const useCustomInput = function (initialValue: string): useCustomInputRet
 
 type CustomInputProps = {
 	input: string,
-	handler: ChangeEventHandler,
-	placeholder?: string,
-	size?: 'small' | 'medium'
-};
+	handler: ChangeEventHandler
+} & TextFieldProps;
 
-const CustomInput = (props: CustomInputProps) => {
+const CustomInput = ({ input, handler, ...props }: CustomInputProps) => {
 	return (
 		<TextField
-			value={props.input} onChange={props.handler}
-			variant='outlined' size={props.size || 'small'} placeholder={props.placeholder || ''} fullWidth={true}
+			value={input} onChange={handler}
+			variant='outlined' size={props.size || 'small' } {...props} fullWidth={true}
 		/>
 	);
 };

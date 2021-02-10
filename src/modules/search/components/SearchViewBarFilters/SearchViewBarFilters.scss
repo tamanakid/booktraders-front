@@ -1,7 +1,33 @@
-.search-view-filters {
+.v-search-filters {
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 1rem;
 }
+
+.v-search-filters-menu {
+	&__container {
+		width: 500px !important;
+	}
+
+	&__title {
+		text-align: center;
+		font-size: 1rem;
+	}
+
+	&__item {
+		font-size: 0.7rem !important;
+	}
+
+	&__loading {
+		font-size: 0.7rem !important;
+	}
+
+	& ul.MuiList-root.MuiMenu-list.MuiList-padding {
+		overflow: hidden;
+	}
+}
+
+/**
+/* { title, array, showLoader, key, text } */
