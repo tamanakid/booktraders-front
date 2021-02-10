@@ -1,10 +1,11 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
 
 
 /**
- * These values are copied from the colors defined at styles/_variables.scss
+ * All these values are copied from the colors defined at styles/_variables.scss and the index.scss in general
  * - primary: $color-primary
  * - secondary: $color-secondary (shaded dark 20%)
+ * - fontFamily: at index.scss
  */
 const muiTheme = createMuiTheme({
   palette: {
@@ -14,6 +15,9 @@ const muiTheme = createMuiTheme({
     secondary: {
       main: '#BD9B35'
     }
+  },
+  typography: {
+    fontFamily: 'Quattrocento'
   }
 });
 
