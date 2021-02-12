@@ -9,5 +9,16 @@
 
 .flex {
 	display: flex;
-	align-items: stretch;
+	
+
+	&.align_center {
+		align-items: center;
+	}
+	&.align_stretch {
+		align-items: stretch;
+	}
+
+	&.justify_between {
+		justify-content: space-between;
+	}
 }

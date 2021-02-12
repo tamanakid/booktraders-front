@@ -1,11 +1,11 @@
 import React, { useState, useCallback, ChangeEventHandler, ChangeEvent } from 'react';
 import { TextField, TextFieldProps } from '@material-ui/core'
 
-import { SetStateDispatch } from 'utils/types/CustomHookTypes'
+import { TSetStateDispatch } from 'utils/types/CustomHookTypes'
 
 
 
-type useCustomInputReturns = [string, ChangeEventHandler, SetStateDispatch<string>?]
+type useCustomInputReturns = [string, ChangeEventHandler, TSetStateDispatch<string>?]
 
 export const useCustomInput = function (initialValue: string): useCustomInputReturns {
 	const [input, setInput] = useState<string>(initialValue)

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { Grid, Button, Paper, Menu, MenuItem } from '@material-ui/core';
 
-import { SetStateDispatch } from 'utils/types/CustomHookTypes'
+import { TSetStateDispatch } from 'utils/types/CustomHookTypes'
 
 import './SearchViewBarFilters.scss';
 
 
 type SearchViewBarFiltersProps = {
 	selected: Array<string>,
-	setSelected: SetStateDispatch<Array<string>>
+	setSelected: TSetStateDispatch<Array<string>>
 }
 
 
@@ -17,13 +17,17 @@ const SearchViewBarFilters = ({ selected, setSelected }: SearchViewBarFiltersPro
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 	const [isMenuOpen, setMenuOpen] = useState<boolean>(false)
 
+	const menuButton = React.useRef<HTMLButtonElement>(null)
 	const onOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
-		setMenuOpen(true)
+		setMenuOpen(true);
 	}
 	const onCloseMenu = () => {
 		setAnchorEl(null);
-		setMenuOpen(false)
+		setMenuOpen(false);
+		setTimeout(() => {
+			menuButton.current && menuButton.current.blur();
+		})
 	}
 
 	interface Genre { name: string, id: number };
@@ -47,6 +51,10 @@ const SearchViewBarFilters = ({ selected, setSelected }: SearchViewBarFiltersPro
 	}, [])
 
 
+	const onSelectFilterElement = () => {
+		console.log('eaen');
+	}
+
 	interface JsxFilterSection {
 		(title: string, array: Array<any> | null, showLoader: boolean, key: string | undefined, text: string | undefined): JSX.Element | JSX.Element[];
 	}
@@ -56,6 +64,7 @@ const SearchViewBarFilters = ({ selected, setSelected }: SearchViewBarFiltersPro
 				<MenuItem
 					key={key ? element[key] : element}
 					className="v-search-filters-menu__item"
+					onClick={() => onSelectFilterElement()}
 				>
 					{text ? element[text] : element}
 				</MenuItem>
@@ -72,39 +81,6 @@ const SearchViewBarFilters = ({ selected, setSelected }: SearchViewBarFiltersPro
 			)
 	}
 
-	/**
-	let jsxGenres: JSX.Element | JSX.Element[] = genres ?
-		genres.map(genre => (
-			<MenuItem
-				key={genre.id}
-				className="v-search-filters-menu__item"
-			>
-				{genre.name}
-			</MenuItem>
-		)) :
-		<MenuItem className="v-search-filters-menu__loading">
-			Loading genres...
-		</MenuItem>;
-
-	let jsxCondition: JSX.Element[] = conditions.map(condition => (
-			<MenuItem
-				key={condition}
-				className="v-search-filters-menu__item"
-			>
-				{condition}
-			</MenuItem>
-		));
-	
-	let jsxDistance: JSX.Element[] = distances.map(distance => (
-		<MenuItem
-			key={distance}
-			className="v-search-filters-menu__item"
-		>
-			{distance} Km
-		</MenuItem>
-	));
-	*/
-
 	let jsxSelectedFilters: JSX.Element = selected.length ?
 		<span>{selected.join(', ')}</span> :
 		<span>Select filters</span>
@@ -114,14 +90,14 @@ const SearchViewBarFilters = ({ selected, setSelected }: SearchViewBarFiltersPro
 			{jsxSelectedFilters}
 
 			<div>
-				<Button onMouseEnter={onOpenMenu}>
+				<Button onClick={onOpenMenu} ref={menuButton}>
 					<i className="fa fa-bars fa-xs" />
 				</Button>
 				<Menu
 					className="v-search-filters-menu"
 					open={isMenuOpen}
 					anchorEl={anchorEl}
-					MenuListProps={{ onMouseLeave: onCloseMenu }}
+					onClose={onCloseMenu}
 					getContentAnchorEl={null}
 					anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
 					transformOrigin={{ vertical: 'top', horizontal: 'right' }}

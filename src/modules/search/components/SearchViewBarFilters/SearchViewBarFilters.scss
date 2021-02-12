@@ -3,17 +3,19 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 1rem;
+	padding-left: 1rem;
 }
 
 .v-search-filters-menu {
 	&__container {
-		width: 500px !important;
+		width: 30vw !important;
+		max-width: 300px !important;
 	}
 
 	&__title {
 		text-align: center;
 		font-size: 1rem;
+		padding-bottom: 0.5rem;
 	}
 
 	&__item {
@@ -28,6 +30,3 @@
 		overflow: hidden;
 	}
 }
-
-/**
-/* { title, array, showLoader, key, text } */

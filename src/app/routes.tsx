@@ -1,10 +1,10 @@
-import IAppRoute from 'utils/interfaces/IAppRoutes'
+import TAppRoute from 'utils/types/TAppRoutes';
 
-import SearchView from 'modules/search/SearchView'
+import SearchView from 'modules/search/SearchView';
 
 
-let appRoutes: Array<IAppRoute> = [
+let appRoutes: Array<TAppRoute> = [
 	{ view: SearchView, name: 'search', path: '/search', exact: true }
-]
+];
 
 export default appRoutes;

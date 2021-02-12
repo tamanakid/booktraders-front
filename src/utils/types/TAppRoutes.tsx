@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface IAppRoute {
+type TAppRoute = {
 	view: React.FunctionComponent,
 	name: string,
 	path: string,
 	exact: boolean,
 };
 
-export default IAppRoute;
+export default TAppRoute;
