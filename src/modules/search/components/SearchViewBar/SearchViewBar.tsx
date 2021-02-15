@@ -1,39 +1,21 @@
-import React, { useState, useReducer, MouseEvent, Reducer } from 'react';
+import React, { useState, MouseEvent, useEffect } from 'react';
 import { Grid, Button, Chip, Menu } from '@material-ui/core';
 
+import { EHorizontalOrientation } from 'utils/enums/EMaterialUI'
+import { EFilterType, TFilter } from 'modules/search/utils/FiltersUtils'
 import CustomInput, { useCustomInput } from 'components/CustomInput/CustomInput';
+import SearchViewFiltersList from '../SearchViewFiltersList/SearchViewFiltersList';
 
-import SearchViewBarFilters from '../SearchViewBarFilters/SearchViewBarFilters'
-import '../SearchViewBarFilters/SearchViewBarFilters.scss';
-
-type ReducerAction<P, T> = { payload: P, type: T }
+import './SearchViewBar.scss';
 
 
-enum EHorizontalOrientation {
-	Left = 'left',
-	Center = 'center',
-	Right = 'right'
-};
 
-enum EFilterType {
-	Genre = 'genre',
-	Condition = 'condition',
-	Distance = 'distance'
-}
-interface IFilter {
-	id: number,
-	label: string,
-	type: EFilterType
-};
-type TFilter = IFilter | null;
-type Filters = {
-	[key in EFilterType]: TFilter
-};
 
 type TFilterMenu = {
 	type: EFilterType,
-	menuComponent?: React.FunctionComponent,
+	menuComponent: React.ComponentType<any>,
 	menuOrigin: EHorizontalOrientation,
+	icon: string,
 }
 
 
@@ -43,22 +25,28 @@ const SearchViewBar = () => {
 	const [inputSearch, inputSearchHandler] = useCustomInput('');
 
 	const filterMenus: Array<TFilterMenu> = [
-		{ type: EFilterType.Genre, menuOrigin: EHorizontalOrientation.Left },
-		{ type: EFilterType.Condition, menuOrigin: EHorizontalOrientation.Center },
-		{ type: EFilterType.Distance, menuOrigin: EHorizontalOrientation.Right }
+		{ type: EFilterType.Genre, menuOrigin: EHorizontalOrientation.Left, menuComponent: SearchViewFiltersList, icon: 'th' },
+		{ type: EFilterType.Condition, menuOrigin: EHorizontalOrientation.Center, menuComponent: SearchViewFiltersList, icon: 'archive' },
+		{ type: EFilterType.Distance, menuOrigin: EHorizontalOrientation.Right, menuComponent: SearchViewFiltersList, icon: 'map-marker' }
 	]
 
-	const initialFilters: Filters = { 'genre': null, 'condition': null, 'distance': null };
-	const filtersReducer = (state: Filters, { payload, type }: ReducerAction<TFilter, EFilterType>): Filters => {
+	/**
+	const initialFilters: Array<TFilter> = [];
+	const filtersReducer = (state: Array<TFilter>, { payload, type }: ReducerAction<TFilter, EFilterType>): Array<TFilter> => {
 		return { ...state, [type]: payload };
 	};
-	// <Reducer<Filters, ReducerAction<TFilter, EFilterType>>>
+	// <Reducer<TFilters, ReducerAction<TFilter, EFilterType>>>
 	const [selectedFilters, setSelectedFilters] = useReducer(filtersReducer, initialFilters);
+	*/
+	const [selectedFilters, setSelectedFilters] = useState<Array<TFilter>>([])
 
 	const handleDelete: (event: any) => void = () => {
 		console.log('handleDelete');
 	};
 
+	const [conditionsList, setConditionsList] = useState<Array<TFilter>>(
+		[{ id: 201, name: 'New', type: EFilterType.Condition }, { id: 202, name: 'Unused', type: EFilterType.Condition }, { id: 203, name: 'Good Condition', type: EFilterType.Condition }]
+	)
 
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 	const [selectedMenu, setSelectedMenu] = useState<TFilterMenu | null>(null)
@@ -90,13 +78,13 @@ const SearchViewBar = () => {
 						label={filterMenu.type}
 						style={{ padding: '1rem 0.5rem' }}
 						onDelete={handleDelete}
-						icon={<i className="fa fa-search fa-xs pr-2" />}
+						icon={<i className={`fa fa-${filterMenu.icon} fa-xs pr-2`}></i>}
 						onClick={({ currentTarget }: MouseEvent<HTMLDivElement>) => onOpenMenu(currentTarget, filterMenu)}
 						component="div"
 					/>
 				))}
 				<Menu
-					className="v-search-filters-menu"
+					className="v-search-bar-menu"
 					open={!!selectedMenu}
 					anchorEl={anchorEl}
 					onClose={onCloseMenu}
@@ -104,16 +92,16 @@ const SearchViewBar = () => {
 					anchorOrigin={{ vertical: 'bottom', horizontal: selectedMenu?.menuOrigin || 0 }}
 					transformOrigin={{ vertical: 'top', horizontal: selectedMenu?.menuOrigin || 0 }}
 				>
-					<div className="v-search-filters-menu__container">
-						Hello
-					</div>
+					{(() => {
+						const MenuComponent = selectedMenu && selectedMenu.menuComponent;
+						return MenuComponent ? (
+							<MenuComponent					
+								list={conditionsList}
+								selected={selectedFilters}
+								setSelected={setSelectedFilters}
+							/>) :	(null)
+						})()}
 				</Menu>
-				{/**
-				<SearchViewBarFilters
-					selected={selectedFilters}
-					setSelected={setSelectedFilters}
-				/>
-				*/}
 			</Grid>
 
 			<Grid item xs={2}>

@@ -1,0 +1,17 @@
+@import 'index.scss';
+
+
+.v-search-filters-list {
+	&__item {
+		padding: 0.1rem 1rem !important;
+		&_selected {
+			background-color: $color-primary-light-3 !important;
+			font-weight: bold;
+		}
+	}
+
+	&__text {
+		font-size: 0.9rem;
+		font-family: 'Segoe';
+	}
+}
